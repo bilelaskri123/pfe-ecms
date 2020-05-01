@@ -36,5 +36,5 @@ app.use('/ecms/library/book',bookRouter);
 
 
 app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
+    console.log(`Server started on http://localhost:${PORT}`);
 });

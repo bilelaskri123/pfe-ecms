@@ -102,13 +102,13 @@ router.get(
 );
 
 router.get(
-  "/userId",
+  "/:id",
   // [authJwt.verifyToken, authJwt.isAdmin],
   controller.getUserById
 );
 
 
-router.delete("/delete/:id", 
+router.delete("/:id", 
   controller.deleteUser
 );
 

@@ -21,7 +21,7 @@ getAllUsers = (req,res) => {
 }
 
 getUserById = (req,res) => {
-  User.findById(req.body.id || req.params.id, (err, user) => {
+  User.findById(req.params.id, (err, user) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -42,7 +42,7 @@ getUserByName = (req, res) => {
 }
 
 deleteUser = (req,res) => {
-  User.findOneAndDelete({_id : req.body.id || req.params.id }, (err) => {
+  User.findOneAndDelete({_id : req.params.id }, (err) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -53,7 +53,7 @@ deleteUser = (req,res) => {
 
 getUserByRole = (req, res) => {
   
-  var role = req.body.role;
+  var role = req.body.role || req.query.role ;
   console.log(role);
   var id;
 

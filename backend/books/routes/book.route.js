@@ -31,58 +31,57 @@ router.get('/:id', bookcontroller.getBookById);
 router.get('/find/:title', bookcontroller.getBookByTitle);
 router.delete('/delete/all', bookcontroller.deleteAllBooks);
 router.delete('/delete/:id', bookcontroller.deleteBook);
-router.put('/update/:id', bookcontroller.updateBook );
+router.put('/update/:id', bookcontroller.updateBook);
 
 router.use(fileUpload({
-    createParentPath : true
+    createParentPath: true
 }));
 
 router.post('/upload-book', async (req, res) => {
 
-    console.log(req.files.image.name);
+    console.log(req.files);
     try {
-        if(!req.files) {
+        if (!req.files) {
             res.send({
                 status: false,
-                message: 'No file uploaded'
+                message: 'No file uploaded 😒'
             });
         } else {
             //Use the name of the input field (i.e. "image") to retrieve the uploaded file
             let image = req.files.image;
 
-
-              //Use the mv() method to place the file in upload directory (i.e. "uploads")
-              image.mv('./uploads/' + image.name);
+            //Use the mv() method to place the file in upload directory (i.e. "uploads")
+            image.mv('./uploads/' + image.name);
+            var isImage = (image.mimetype == 'image/png' || image.mimetype == 'image/jpeg');
 
             var book = new Book({
-                title : req.body.title,
-                title : req.body.title,
-                auther : req.body.auther,
-                numberPages : req.body.numberPages,
-                publisher : req.body.publisher,
-                description : req.body.description,
-                image : image.name
+                title: req.body.title,
+                title: req.body.title,
+                auther: req.body.auther,
+                numberPages: req.body.numberPages,
+                publisher: req.body.publisher,
+                description: req.body.description,
+                image: image.name
             });
 
-            book.save((err,book) => {
-                if(err) {
-                    res.send(err);
-                }
-                if(book) {
-                    res.send({
-                        status: true,
-                        message: 'File is uploaded',
-                        data: {
-                            book
-                        }
-                            
-                            // name: image.name,
-                            // mimetype: image.mimetype,
-                            // size: image.size
-                       
-                    });
-                }
-            })  
+            if (!isImage) {
+                res.send('required an image 😛');
+            } else {
+                book.save((err, book) => {
+                    if (err) {
+                        res.send(err);
+                    }
+                    if (book) {
+                        res.send({
+                            status: true,
+                            message: 'book is added with success 😃',
+                            data: {
+                                book
+                            }
+                        });
+                    }
+                })
+            }
         }
 
     } catch (err) {
@@ -92,15 +91,4 @@ router.post('/upload-book', async (req, res) => {
 
 
 router.use(express.static(path.join(__dirname, "uploads")));
-
-// router.get('/download', (req, res) => {
-//     res.download(path.join(__dirname, "/uploads/docker.png")).send('ok');
-    
-// });
-
-
-
-
-
-
 module.exports = router;

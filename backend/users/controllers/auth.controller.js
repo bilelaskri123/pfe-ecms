@@ -128,53 +128,21 @@ exports.signin = (req, res) => {
     });
 };
 
-
-
-  /** pour save user */
-  // user.save((err, user) => {
-  //   if (err) {
-  //     res.status(500).send({ message: err });
-  //     return;
-  //   }
-
-  //   if (req.body.role) {
-  //     Role.find(
-  //       {
-  //         name: { $in: req.body.role }
-  //       },
-  //       (err, role) => {
-  //         if (err) {
-  //           res.status(500).send({ message: err });
-  //           return;
-  //         }
-
-  //         user.role = role.map(role => role._id);
-  //         user.save(err => {
-  //           if (err) {
-  //             res.status(500).send({ message: err });
-  //             return;
-  //           }
-
-  //           res.send({ message: "User was registered successfully!" });
-  //         });
-  //       }
-  //     );
-  //   } else {
-  //     Role.findOne({ name: "user" }, (err, role) => {
-  //       if (err) {
-  //         res.status(500).send({ message: err });
-  //         return;
-  //       }
-
-  //       user.role = [role._id];
-  //       user.save(err => {
-  //         if (err) {
-  //           res.status(500).send({ message: err });
-  //           return;
-  //         }
-
-  //         res.send({ message: "User was registered successfully!" });
-  //       });
-  //     });
-  //   }
-  // });
+exports.verifyRole = (req, res, next) => {
+  let id = req.params.id;
+  User.findById(id, (err, user) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    else {
+      Role.find({_id : user.role}, (err, role) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        if (role) {
+          res.send(role[0].name);
+        }
+      });
+    }
+  });
+}

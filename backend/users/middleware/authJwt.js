@@ -27,8 +27,9 @@ verifyToken = (req, res, next) => {
   });
 };
 
+
 isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  User.findById(req.params.id).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -57,7 +58,7 @@ isAdmin = (req, res, next) => {
 };
 
 isStudent = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  User.findById(req.params.id).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -73,7 +74,6 @@ isStudent = (req, res, next) => {
           return;
         }
 
-
         if (role.name === "student") {
           next();
           return;
@@ -87,7 +87,7 @@ isStudent = (req, res, next) => {
 };
 
 isParent = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  User.findById(req.params.id).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;

@@ -21,7 +21,6 @@ var courSchema = mongoose.Schema({
         ref: "Group"
         
     }
-
 });
 
 module.exports = mongoose.model('Cour', courSchema);

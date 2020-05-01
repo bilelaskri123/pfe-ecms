@@ -13,7 +13,7 @@ router.get('/:id', productcontroller.getProductById); // get product by id
 router.get('/:category', productcontroller.getProductByCategory); // get products by category 
 router.delete('/delete/all', productcontroller.deleteAllProduct); // delete all products 
 router.delete('/delete/:id', productcontroller.deleteById); // delete product by id 
-router.put('/update/:id', productcontroller.updateProduct);
+router.put('/update/:id', productcontroller.updateProduct); // update product 
 
 
 const multer = require('multer');
@@ -49,7 +49,7 @@ router.post('/newProduct', upload.single('image'), async (req, res) => {
         if (!photo) {
             res.status(400).send({
                 status: false,
-                data: 'No file is selected.'
+                data: 'No file is selected 😔'
             });
         } else {
 
@@ -73,12 +73,12 @@ router.post('/newProduct', upload.single('image'), async (req, res) => {
                         res.status(500).send(err);
                     }
                     res.json({
-                        message: 'product created with success !',
+                        message: 'product created with success 😃',
                         data: product
                     })
                 });
             } else {
-                res.send('require an image !')
+                res.send('require an image 😛')
             }
         }
     } catch (err) {
