@@ -28,7 +28,7 @@ mongoose.connect('mongodb://localhost:27017/books', {
 
 app.use(express.static('uploads'));
 // load our router 
-const bookRouter = require('./routes/book.route');
+const bookRouter = require('./routes/book.routes');
 
 // use the router 
 app.use('/ecms/library/book',bookRouter);
@@ -36,5 +36,5 @@ app.use('/ecms/library/book',bookRouter);
 
 
 app.listen(PORT, () => {
-    console.log(`Server started on http://localhost:${PORT}`);
+    console.log(`Server of books started on http://localhost:${PORT}`);
 });

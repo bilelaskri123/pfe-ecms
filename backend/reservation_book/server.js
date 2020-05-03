@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/reservationBook', {
     }
 })
 
-const Reservation = require('./routes/Reservation');
+const Reservation = require('./routes/Reservation.routes');
 app.use('/ecms/reservation', Reservation);
 
 app.listen(PORT, () => {
