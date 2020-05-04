@@ -19,7 +19,10 @@ mongoose.connect('mongodb://localhost:27017/examen', {
     } else {
         console.log('success to connect to database');
     }
-})
+});
+
+const Examen = require('./routes/examen.routes');
+app.use('/ecms/examen', Examen);
 
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);

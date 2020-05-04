@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/books', {
         console.log(err);
     }
     console.log('success to connect to database');
-})
+});
 
 
 app.use(express.static('uploads'));

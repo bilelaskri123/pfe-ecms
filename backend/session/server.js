@@ -19,7 +19,10 @@ mongoose.connect('mongodb://localhost:27017/session', {
     } else {
         console.log('success to connect to database');
     }
-})
+});
+
+const Session = require('./routes/session.routes');
+app.use('/ecms/session', Session);
 
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);
