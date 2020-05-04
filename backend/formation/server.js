@@ -19,8 +19,12 @@ mongoose.connect('mongodb://localhost:27017/formation', {
     } else {
         console.log('success to connect to database');
     }
-})
+});
+
+const Formation = require('./routes/formation.routes');
+
+app.use('/ecms/formation', Formation);
 
 app.listen(PORT, () => {
-    console.log(`Server started on ${PORT}`);
+    console.log(`Server of formation started on http://localhost:${PORT}`);
 });

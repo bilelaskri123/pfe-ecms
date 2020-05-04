@@ -4,7 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
@@ -19,8 +19,11 @@ mongoose.connect('mongodb://localhost:27017/group', {
     } else {
         console.log('success to connect to database');
     }
-})
+});
+
+const Group = require('./routes/groupRoute');
+ app.use('/ecms/group', Group);
 
 app.listen(PORT, () => {
-    console.log(`Server started on ${PORT}`);
+    console.log(`Server of Group started on http://localhost:${PORT}`);
 });
