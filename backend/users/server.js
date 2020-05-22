@@ -7,6 +7,7 @@ const app = express();
 /**
  * ? cors est utiliser pour la communication entre le backend et le frontend
  */
+
 var corsOptions = {
     origin: "http://localhost:8081"
 };
@@ -52,7 +53,7 @@ app.use('/ecms/auth', auth);
 app.use('/ecms/user', user);
 
 // set port listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3019;
 app.listen(PORT, () => {
     console.log(`Server of users is running on http://localhost:${PORT}`);
 });
